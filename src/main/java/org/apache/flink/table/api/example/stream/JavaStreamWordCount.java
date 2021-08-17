@@ -3,7 +3,7 @@ package org.apache.flink.table.api.example.stream;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.TableEnvironment;
+
 import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.descriptors.FileSystem;
 import org.apache.flink.table.descriptors.OldCsv;
@@ -14,7 +14,7 @@ public class JavaStreamWordCount {
 
 	public static void main(String[] args) throws Exception {
 		StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
-		StreamTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
+		StreamTableEnvironment tEnv = StreamTableEnvironment.create(env);
 
 		String path = JavaStreamWordCount.class.getClassLoader().getResource("words.txt").getPath();
 		tEnv.connect(new FileSystem().path(path))
